@@ -1,5 +1,12 @@
 [
   {"id": 1, "image": "https://bitress.xyz/img/slide1.png"},
   {"id": 2, "image": "https://bitress.xyz/img/slide2.png"},
-  {"id": 3, "image": "https://bitress.xyz/img/slide3.png"}
+  {"id": 3, "image": "https://bitress.xyz/img/wc.jpg"},
+  {"id": 4, "image": "https://bitress.xyz/img/slide3.png"},
+  {"id": 5, "image": "https://bitress.xyz/images/Screenshot_2024-01-28_130635.png"},
+  {"id": 6, "image": "https://bitress.xyz/images/Picture8.jpg"}, 
+  {"id": 7, "image": "https://bitress.xyz/img/library.jpg"}, 
+  {"id": 8, "image": "https://bitress.xyz/images/ispsc.png"}, 
+  {"id": 9, "image": "https://bitress.xyz/images/gate.png"}, 
+  {"id": 10, "image": "https://bitress.xyz/images/campus.png"} 
 ]

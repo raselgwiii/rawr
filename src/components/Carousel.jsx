@@ -1,68 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import carousel from './../carousel.json';
+import React, { useState, useEffect } from 'react';
+import imagesData from './../carousel.json';
 
-function Carousel() {
-  const [carouselData, setCarousel] = useState([]);
+const Carousel = () => {
+  const [currentSlide, setCurrentSlide] = useState(1);
 
-  const fetchCarousel = () => {
-    setCarousel(carousel);
+  const handleChangeSlide = (slideNumber) => {
+    setCurrentSlide(slideNumber);
   };
 
   useEffect(() => {
-    fetchCarousel();
-  }, []);
+    const autoSlideInterval = setInterval(() => {
+      const nextSlide = (currentSlide % imagesData.length) + 1;
+      handleChangeSlide(nextSlide);
+    }, 3000);
+
+    return () => clearInterval(autoSlideInterval);
+  }, [currentSlide]);
 
   return (
-    <div className="carousel">
-      <ul className="slides">
-        {carouselData.map((c) => (
-          <React.Fragment key={c.id}>
-            <input
-              type="radio"
-              name="radio-buttons"
-              id={`img-${c.id}`}
-              defaultChecked={c.id === carouselData[0].id}
-            />
-            <li className="slide-container">
-              <div className="slide-image">
-                <img src={encodeURI(c.image)} alt={`Carousel Image ${c.id}`} />
-              </div>
-              <div className="carousel-controls">
-                <label
-                  htmlFor={`img-${c.id === carouselData[0].id ? carouselData[carouselData.length - 1].id : c.id}`}
-                  className="prev-slide"
-                >
-                  <span>&lsaquo;</span>
-                </label>
-                <label
-                  htmlFor={`img-${c.id === carouselData[carouselData.length - 1].id ? carouselData[0].id : c.id + 1}`}
-                  className="next-slide"
-                >
-                  <span>&rsaquo;</span>
-                </label>
-              </div>
-            </li>
-            <label
-              htmlFor={`img-${c.id}`}
-              className="carousel-dot"
-              id={`img-dot-${c.id}`}
-            ></label>
-          </React.Fragment>
-        ))}
-      </ul>
-
-      <div className="carousel-dots">
-        {carouselData.map((c) => (
-          <label
-            key={`dot-${c.id}`}
-            htmlFor={`img-${c.id}`}
-            className="carousel-dot"
-            id={`img-dot-${c.id}`}
-          ></label>
-        ))}
-      </div>
-    </div>
+        <div className="carousel">
+          <ul className="slides">
+            {imagesData.map((image, index) => (
+              <React.Fragment key={index}>
+                <input
+                  type="radio"
+                  name="radio-buttons"
+                  id={`img-${image.id}`}
+                  checked={currentSlide === image.id}
+                  onChange={() => handleChangeSlide(image.id)}
+                />
+                <li className={`slide-container ${currentSlide === image.id ? 'active' : ''}`}>
+                  <div className="slide-image">
+                    <img src={image.image} alt={`Slide ${image.id}`} />
+                  </div>
+                  <div className="carousel-controls">
+                    <label
+                      htmlFor={`img-${(image.id - 2 + imagesData.length) % imagesData.length + 1}`}
+                      className="prev-slide"
+                      onClick={() =>
+                        handleChangeSlide(
+                          (image.id - 2 + imagesData.length) % imagesData.length + 1
+                        )
+                      }
+                    >
+                      <span>&lsaquo;</span>
+                    </label>
+                    <label
+                      htmlFor={`img-${image.id % imagesData.length + 1}`}
+                      className="next-slide"
+                      onClick={() => handleChangeSlide(image.id % imagesData.length + 1)}
+                    >
+                      <span>&rsaquo;</span>
+                    </label>
+                  </div>
+                </li>
+              </React.Fragment>
+            ))}
+          </ul>
+        </div>
+     
   );
-}
+};
 
 export default Carousel;
