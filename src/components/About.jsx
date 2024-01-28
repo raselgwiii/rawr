@@ -42,7 +42,7 @@ function About() {
                     <div class="department-card">
                         <h2 class="department-title">CAS</h2>
                         <p class="department-description">The College of Arts and Sciences</p>
-                    </div>s
+                    </div>
                 </div>
                 <div class="useful-links">
                     <h2>Useful Links</h2>
