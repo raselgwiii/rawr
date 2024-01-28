@@ -251,7 +251,7 @@ nav ul.subclass li:hover a:hover{
     height: 90%;
     top: 0;
     opacity: 0;
-    transition: all .5s ease-in-out;
+    transition: all .7s ease-in-out;
   }   
   
   .slide-image img {
@@ -356,7 +356,34 @@ nav ul.subclass li:hover a:hover{
   width: 600px;
 
 }
-
+.vm h3{
+  text-align: center;
+  font-family: 'Poppins';
+  font-weight: bold;
+  margin: 20px;
+  color:#fff;
+  background-color: #990000;
+}
+.VMPC_uwu {
+    font-family: 'Poppins';
+    color: black;
+    text-align: justify;
+    background-color:#fff;
+    border: black;
+    padding: 20px;
+}
+.VMPC_uwu span {
+  font-weight: bold;
+  font-size:24px;
+  color: maroon;
+  }
+.heading h3{
+  font-family: 'Poppins';
+  font-weight: bold;
+  margin: 20px;
+  color: #fff;
+  background-color: #990000;
+}
 .banner_text h3>span {
     font-size: 60px;
     color: #800000;

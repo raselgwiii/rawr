@@ -1,4 +1,5 @@
 [
   {"id": 1, "image": "https://bitress.xyz/img/slide1.png"},
-  {"id": 2, "image": "https://bitress.xyz/img/2.jpg"}
+  {"id": 2, "image": "https://bitress.xyz/img/slide2.png"},
+  {"id": 3, "image": "https://bitress.xyz/img/slide3.png"}
 ]

@@ -1,46 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import carouselData from './../carousel.json';
+import carousel from './../carousel.json';
 
 function Carousel() {
-  const [currentSlide, setCurrentSlide] = useState(1);
+  const [carouselData, setCarousel] = useState([]);
 
-  const nextSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide === carouselData.length ? 1 : prevSlide + 1));
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide === 1 ? carouselData.length : prevSlide - 1));
+  const fetchCarousel = () => {
+    setCarousel(carousel);
   };
 
   useEffect(() => {
-    const intervalId = setInterval(nextSlide, 5000); // Change the time (in milliseconds) between slides
-
-    return () => clearInterval(intervalId);
-  }, [currentSlide]);
+    fetchCarousel();
+  }, []);
 
   return (
     <div className="carousel">
-      <div className="slide-container">
-        <ul className="slides" style={{ transform: `translateX(-${(currentSlide - 1) * 100}%)` }}>
-          {carouselData.map((item, index) => (
-            <li key={item.id} className="slide-image">
-              <img src={item.image} alt={`Slide ${item.id}`} />
+      <ul className="slides">
+        {carouselData.map((c) => (
+          <React.Fragment key={c.id}>
+            <input
+              type="radio"
+              name="radio-buttons"
+              id={`img-${c.id}`}
+              defaultChecked={c.id === carouselData[0].id}
+            />
+            <li className="slide-container">
+              <div className="slide-image">
+                <img src={encodeURI(c.image)} alt={`Carousel Image ${c.id}`} />
+              </div>
+              <div className="carousel-controls">
+                <label
+                  htmlFor={`img-${c.id === carouselData[0].id ? carouselData[carouselData.length - 1].id : c.id}`}
+                  className="prev-slide"
+                >
+                  <span>&lsaquo;</span>
+                </label>
+                <label
+                  htmlFor={`img-${c.id === carouselData[carouselData.length - 1].id ? carouselData[0].id : c.id + 1}`}
+                  className="next-slide"
+                >
+                  <span>&rsaquo;</span>
+                </label>
+              </div>
             </li>
-          ))}
-        </ul>
-        <div className="carousel-controls">
-          <label className="prev-slide" onClick={prevSlide}>&#10094;</label>
-          <label className="next-slide" onClick={nextSlide}>&#10095;</label>
-        </div>
-        <div className="carousel-dots">
-          {carouselData.map((item, index) => (
             <label
-              key={`img-dot-${item.id}`}
-              className={`carousel-dot ${index + 1 === currentSlide ? 'active' : ''}`}
-              onClick={() => setCurrentSlide(index + 1)}
+              htmlFor={`img-${c.id}`}
+              className="carousel-dot"
+              id={`img-dot-${c.id}`}
             ></label>
-          ))}
-        </div>
+          </React.Fragment>
+        ))}
+      </ul>
+
+      <div className="carousel-dots">
+        {carouselData.map((c) => (
+          <label
+            key={`dot-${c.id}`}
+            htmlFor={`img-${c.id}`}
+            className="carousel-dot"
+            id={`img-dot-${c.id}`}
+          ></label>
+        ))}
       </div>
     </div>
   );
